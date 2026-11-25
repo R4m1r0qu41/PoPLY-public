@@ -148,7 +148,8 @@ contract CharacterItemBinding is IItemLock {
         if (binding.boundAt == 0) revert NotBound();
         if (!binding.releasable) revert NotReleasable();
         if (IItemNFT(itemContract).ownerOf(itemId) != msg.sender) revert NotOwnerOfBoth();
-        if (IPoPLYCharacter(binding.characterContract).licenseManager()
+        if (IPoPLYCharacter(binding.characterContract)
+                .licenseManager()
                 .isCharacterLocked(binding.characterContract, binding.characterId)) revert CharacterExclusivelyLicensed();
         delete _bindings[itemKey];
         emit ItemUnbound(itemContract, itemId, binding.characterContract, binding.characterId);
