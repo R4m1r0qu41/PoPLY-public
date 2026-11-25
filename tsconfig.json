@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": [
+    "sdk/src/**/*.ts",
+    "backend/src/**/*.ts",
+    "reference-game/src/**/*.ts",
+    "scripts/**/*.ts"
+  ]
+}

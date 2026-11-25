@@ -1,0 +1,26 @@
+name: Reference implementation checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  protocol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: npm ci
+      - run: npm run check
+      - run: npm run e2e:local
+      - name: Install pinned Godot for the server transport sample
+        run: |
+          curl --fail --location --output /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip
+          unzip /tmp/godot.zip -d /tmp/godot
+          echo "GODOT_BIN=/tmp/godot/Godot_v4.5.1-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - run: npm run e2e:godot

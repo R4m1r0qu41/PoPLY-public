@@ -1,0 +1,36 @@
+{
+  "name": "@cipherlayer/poply",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build:arena": "vite build reference-game",
+    "build:contracts": "forge build",
+    "demo:local": "node scripts/local-demo.ts",
+    "seed:publishers": "node scripts/seed-publishers.ts",
+    "e2e:local": "./scripts/e2e-local.sh",
+    "e2e:godot": "./scripts/godot-e2e.sh",
+    "dev:api": "node backend/src/server.ts",
+    "dev:arena": "vite reference-game",
+    "test:contracts": "forge test",
+    "test:sdk": "node --test sdk/src/*.test.ts backend/src/*.test.ts reference-game/src/**/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:contracts && npm run test:sdk",
+    "check": "forge fmt --check && forge build && npm run typecheck && npm run build:arena && npm run test"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "phaser": "3.90.0",
+    "viem": "2.54.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.0",
+    "ajv-formats": "3.0.1",
+    "typescript": "6.0.3",
+    "vite": "8.1.3"
+  }
+}

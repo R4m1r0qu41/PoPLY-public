@@ -1,0 +1,14 @@
+{
+  "characterContract": "0x1000000000000000000000000000000000000001",
+  "tokenId": "1",
+  "gameId": "0xa807d4d4c73f90fd24fd4dfb0a08e70a249e6c267fa0ad4f9a735d2ca1059393",
+  "sequence": "1",
+  "state": {
+    "arena": "reference-01",
+    "elapsedMs": 8420,
+    "remainingHealth": 64,
+    "result": "victory"
+  },
+  "playTimeSeconds": "9",
+  "achievementCount": 1
+}

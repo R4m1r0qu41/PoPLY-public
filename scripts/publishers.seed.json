@@ -1,0 +1,26 @@
+{
+  "_note": "Seed allowlist for the PoPLY VerifierRegistry. Edit before running in production. 'slug' fields derive the on-chain bytes32 ids via keccak256(bytes(slug)) and must stay stable once used. 'openLicensing' lets anyone accept a public/open license offer on that publisher's characters; 'minPublicOfferPriceEther' is the alternative collectible threshold (0 disables the price path). Game slugs are illustrative examples — replace with the publisher's real title identifiers.",
+  "publishers": [
+    { "name": "Roblox", "slug": "roblox", "openLicensing": true, "minPublicOfferPriceEther": "0", "games": [{ "name": "Natural Disaster Survival", "slug": "roblox.natural-disaster-survival" }] },
+    { "name": "Epic Games", "slug": "epic-games", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Fortnite", "slug": "epic-games.fortnite" }] },
+    { "name": "Electronic Arts", "slug": "electronic-arts", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "EA Sports FC", "slug": "electronic-arts.ea-sports-fc" }] },
+    { "name": "Ubisoft", "slug": "ubisoft", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Assassin's Creed", "slug": "ubisoft.assassins-creed" }] },
+    { "name": "Activision Blizzard", "slug": "activision-blizzard", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Call of Duty", "slug": "activision-blizzard.call-of-duty" }] },
+    { "name": "Take-Two Interactive", "slug": "take-two-interactive", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Grand Theft Auto", "slug": "take-two-interactive.grand-theft-auto" }] },
+    { "name": "Nintendo", "slug": "nintendo", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Super Mario", "slug": "nintendo.super-mario" }] },
+    { "name": "Sony Interactive Entertainment", "slug": "sony-interactive-entertainment", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Horizon", "slug": "sony-interactive-entertainment.horizon" }] },
+    { "name": "Xbox Game Studios", "slug": "xbox-game-studios", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Halo", "slug": "xbox-game-studios.halo" }] },
+    { "name": "Tencent Games", "slug": "tencent-games", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Honor of Kings", "slug": "tencent-games.honor-of-kings" }] },
+    { "name": "NetEase Games", "slug": "netease-games", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Identity V", "slug": "netease-games.identity-v" }] },
+    { "name": "HoYoverse", "slug": "hoyoverse", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Genshin Impact", "slug": "hoyoverse.genshin-impact" }] },
+    { "name": "Valve", "slug": "valve", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Counter-Strike 2", "slug": "valve.counter-strike-2" }] },
+    { "name": "Bandai Namco", "slug": "bandai-namco", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Tekken", "slug": "bandai-namco.tekken" }] },
+    { "name": "Square Enix", "slug": "square-enix", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Final Fantasy", "slug": "square-enix.final-fantasy" }] },
+    { "name": "Sega", "slug": "sega", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Sonic the Hedgehog", "slug": "sega.sonic-the-hedgehog" }] },
+    { "name": "Capcom", "slug": "capcom", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Street Fighter", "slug": "capcom.street-fighter" }] },
+    { "name": "Riot Games", "slug": "riot-games", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "League of Legends", "slug": "riot-games.league-of-legends" }] },
+    { "name": "Supercell", "slug": "supercell", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Clash Royale", "slug": "supercell.clash-royale" }] },
+    { "name": "Krafton", "slug": "krafton", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "PUBG", "slug": "krafton.pubg" }] },
+    { "name": "miHoYo", "slug": "mihoyo", "openLicensing": false, "minPublicOfferPriceEther": "0", "games": [{ "name": "Honkai Star Rail", "slug": "mihoyo.honkai-star-rail" }] }
+  ]
+}

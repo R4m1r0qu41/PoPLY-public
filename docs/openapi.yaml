@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: PoPLY Publisher Verifier API
+  version: 0.2.0
+  description: Issues publisher-signed PoP checkpoints and PoA attestations. Durably recovers checkpoint responses when configured with a persistent store. It does not submit transactions or track confirmations.
+servers:
+  - url: http://127.0.0.1:8787
+paths:
+  /health:
+    get:
+      security: []
+      responses:
+        "200":
+          description: Service is ready.
+  /v1/checkpoints:
+    post:
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckpointRequest"
+      responses:
+        "201":
+          description: Signed checkpoint envelope.
+        "400":
+          description: Invalid or regressive checkpoint.
+        "401":
+          description: Missing or invalid publisher API key.
+        "403":
+          description: Game is outside this API instance credential scope.
+        "409":
+          description: Checkpoint sequence or idempotency conflict; expected sequence is not disclosed.
+        "429":
+          description: Shared per-process request quota exceeded (Retry-After header).
+        "500":
+          description: Internal signing or persistence failure; details are redacted.
+  /v1/checkpoints/recover:
+    post:
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/RecoveryRequest"}
+      responses:
+        "200": {description: Exact original signed checkpoint; may already be expired or accepted on-chain.}
+        "400": {description: Invalid reference or missing outbox entry.}
+        "401": {description: Invalid API key.}
+        "403": {description: Game outside credential scope.}
+        "429": {description: Shared process quota exceeded.}
+        "500": {description: Internal store failure.}
+  /v1/checkpoints/renew:
+    post:
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/RecoveryRequest"}
+      responses:
+        "200": {description: Latest unexpired attempt or newly signed deadline-only renewal of identical facts and sequence.}
+        "400": {description: Invalid reference or missing outbox entry.}
+        "401": {description: Invalid API key.}
+        "403": {description: Game outside credential scope.}
+        "409": {description: Concurrent revision conflict; retry the same renewal.}
+        "429": {description: Shared process quota exceeded.}
+        "500": {description: Internal signing or store failure.}
+  /v1/achievements:
+    post:
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AchievementRequest"
+      responses:
+        "201":
+          description: Signed achievement envelope.
+        "400":
+          description: Invalid achievement.
+        "401":
+          description: Missing or invalid publisher API key.
+        "403":
+          description: Game is outside this API instance credential scope.
+        "409":
+          description: Checkpoint sequence or idempotency conflict; expected sequence is not disclosed.
+        "429":
+          description: Shared per-process request quota exceeded (Retry-After header).
+        "500":
+          description: Internal signing or persistence failure; details are redacted.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    CharacterReference:
+      type: object
+      required: [characterContract, tokenId, gameId]
+      properties:
+        characterContract:
+          type: string
+          pattern: "^0x[0-9a-fA-F]{40}$"
+        tokenId:
+          type: string
+          pattern: "^(0|[1-9][0-9]*)$"
+        gameId:
+          type: string
+          pattern: "^0x[0-9a-fA-F]{64}$"
+    CheckpointRequest:
+      allOf:
+        - $ref: "#/components/schemas/CharacterReference"
+        - type: object
+          required: [sequence, state, playTimeSeconds, achievementCount]
+          properties:
+            sequence:
+              type: string
+              pattern: "^[1-9][0-9]*$"
+            idempotencyKey:
+              type: string
+              pattern: "^[A-Za-z0-9_.:-]{1,128}$"
+              description: Optional but recommended; same key and identical request return the original envelope, including after expiry. A changed request conflicts.
+            state:
+              description: Canonical value; null, boolean, string, safe integer, dense array or plain object. Maximum depth 32 and 10000 visited values; no floats.
+
+            playTimeSeconds:
+              type: string
+              pattern: "^(0|[1-9][0-9]*)$"
+            achievementCount:
+              type: integer
+              minimum: 0
+    AchievementRequest:
+      allOf:
+        - $ref: "#/components/schemas/CharacterReference"
+        - type: object
+          required: [achievement, evidence]
+          properties:
+            achievement:
+              type: string
+              pattern: "^[A-Z][A-Z0-9_]{2,63}$"
+            evidence:
+              description: Same canonical value constraints as state; publisher-specific evidence policy remains external.
+    RecoveryRequest:
+      allOf:
+        - $ref: "#/components/schemas/CharacterReference"
+        - type: object
+          required: [sequence]
+          properties:
+            sequence:
+              type: string
+              pattern: "^[1-9][0-9]*$"

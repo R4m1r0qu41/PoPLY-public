@@ -1,0 +1,22 @@
+[profile.default]
+src = "contracts/src"
+test = "contracts/test"
+script = "contracts/script"
+out = "out"
+cache_path = "cache"
+solc_version = "0.8.30"
+optimizer = true
+optimizer_runs = 10_000
+evm_version = "prague"
+
+[fmt]
+line_length = 100
+tab_width = 4
+bracket_spacing = true
+
+[fuzz]
+runs = 512
+
+[invariant]
+runs = 256
+depth = 64

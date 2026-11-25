@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipherlayer.example/schemas/poply/ai-agent-profile-v1.json",
+  "title": "PoPLY AI Agent Profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "characterContract", "tokenId", "gameId", "licenseId",
+    "licenseExpiresAt", "operatorId", "behaviorManifest", "capabilities", "safetyPolicyId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "characterContract": { "$ref": "#/$defs/address" },
+    "tokenId": { "$ref": "#/$defs/uintString" },
+    "gameId": { "$ref": "#/$defs/bytes32" },
+    "licenseId": { "$ref": "#/$defs/uintString" },
+    "licenseExpiresAt": { "$ref": "#/$defs/uintString" },
+    "operatorId": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "behaviorManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uri", "contentHash"],
+      "properties": {
+        "uri": { "type": "string", "format": "uri" },
+        "contentHash": { "$ref": "#/$defs/bytes32" }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 32,
+      "items": {
+        "enum": ["DIALOGUE", "COMBAT", "COMPANION", "QUEST_GIVER", "TRADING", "TOURNAMENT", "PROMOTION"]
+      }
+    },
+    "prohibitedCapabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 32,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "safetyPolicyId": { "$ref": "#/$defs/bytes32" }
+  },
+  "$defs": {
+    "address": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+    "bytes32": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "uintString": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" }
+  }
+}

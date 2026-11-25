@@ -1,0 +1,11 @@
+{
+  "characterContract": "0x1000000000000000000000000000000000000001",
+  "tokenId": "1",
+  "gameId": "0xa807d4d4c73f90fd24fd4dfb0a08e70a249e6c267fa0ad4f9a735d2ca1059393",
+  "achievement": "FIRST_WIN",
+  "evidence": {
+    "arena": "reference-01",
+    "matchId": "fixture-match-001",
+    "result": "victory"
+  }
+}

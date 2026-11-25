@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07110f" />
+    <title>PoPLY // Reference Arena</title>
+  </head>
+  <body>
+    <main id="shell">
+      <section id="playfield" aria-label="PoPLY reference arena"></section>
+      <header class="hud hud--top">
+        <div class="brand"><span class="brand__mark" aria-hidden="true"></span><div><strong>PoPLY</strong><span>Proof-of-Play reference arena</span></div></div>
+        <div class="round-status" id="round-status">READY // ROUND 01</div>
+      </header>
+      <section class="hud combat-hud" aria-label="Combat status">
+        <div class="fighter fighter--player"><div class="fighter__label"><span>01</span><strong>EMBER</strong><small>PLAYER ASSET</small></div><div class="health"><i id="player-health"></i></div></div>
+        <div class="versus">VS</div>
+        <div class="fighter fighter--enemy"><div class="fighter__label"><span>NPC</span><strong>WARDEN</strong><small>ARENA SENTINEL</small></div><div class="health health--enemy"><i id="enemy-health"></i></div></div>
+      </section>
+      <aside class="proof-panel" id="proof-panel" aria-live="polite">
+        <span class="proof-panel__eyebrow">PROTOCOL TRACE</span>
+        <ol id="proof-log"><li><i></i>Gameplay remains off-chain</li><li><i></i>Awaiting completed match</li></ol>
+      </aside>
+      <section class="start-card" id="start-card">
+        <span class="start-card__kicker">REFERENCE IMPLEMENTATION // 001</span>
+        <h1>Enter the<br /><em>proof arena.</em></h1>
+        <p>Defeat the Warden. The publisher adapter will produce a Proof-of-Play checkpoint and a permanent achievement attestation.</p>
+        <button id="start-button" type="button"><span>START MATCH</span><b>↗</b></button>
+        <div class="controls"><kbd>A</kbd><kbd>D</kbd><span>MOVE</span><kbd>SPACE</kbd><span>STRIKE</span></div>
+      </section>
+      <footer class="hud hud--bottom"><span>LOCAL SIMULATION</span><span id="timer">00:00.0</span><span>CHAIN WRITES: <b id="chain-writes">0</b></span></footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
